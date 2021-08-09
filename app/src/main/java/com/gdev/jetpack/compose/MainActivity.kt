@@ -44,11 +44,14 @@ fun MainScreen() {
                 Button(onClick = { context.startActivity(Intent(context, StatelessMainActivity::class.java)) }) {
                     Text(text = "Text Field Stateless")
                 }
-
                 //Button Move to Expandable CardView sample
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(onClick = { context.startActivity(Intent(context, StatefulExpandableCardActivity::class.java)) }) {
                     Text(text = "Expandable CardView Stateful")
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(onClick = { context.startActivity(Intent(context, AnnotatedStringActivity::class.java)) }) {
+                    Text(text = "Annotated String")
                 }
             }
         }

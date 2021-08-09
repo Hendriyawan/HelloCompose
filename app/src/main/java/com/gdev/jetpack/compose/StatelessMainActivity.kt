@@ -2,9 +2,9 @@ package com.gdev.jetpack.compose
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,7 +21,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.gdev.jetpack.compose.ui.theme.HelloComposeTheme
 
-class StatelessMainActivity : ComponentActivity() {
+class StatelessMainActivity : AppCompatActivity() {
     private val viewModel: HelloViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +69,8 @@ fun HelloContent(name: String, onNameChange: (String) -> Unit) {
             .padding(16.dp)
             .fillMaxWidth()
             .fillMaxHeight(),
-        horizontalAlignment = Alignment.CenterHorizontally) {
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
 
         //Text Greeting
         TextGreeting(greeting)
@@ -77,13 +78,20 @@ fun HelloContent(name: String, onNameChange: (String) -> Unit) {
         OutlinedTextField(
             value = name,
             onValueChange = onNameChange,
-            label = { Text("Name")
-        })
+            label = {
+                Text("Name")
+            })
 
         //Button Click Me
         Button(
             modifier = Modifier.padding(16.dp),
-            onClick = { if (name.isEmpty()) Toast.makeText(context, "Enter Name", Toast.LENGTH_SHORT).show() else greeting = name }) {
+            onClick = {
+                if (name.isEmpty()) Toast.makeText(
+                    context,
+                    "Enter Name",
+                    Toast.LENGTH_SHORT
+                ).show() else greeting = name
+            }) {
             Text(text = "Click Me")
         }
     }
