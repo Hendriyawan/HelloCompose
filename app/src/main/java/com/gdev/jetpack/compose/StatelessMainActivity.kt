@@ -27,7 +27,7 @@ class StatelessMainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HelloComposeTheme(darkTheme = true) {
-                Surface(color = MaterialTheme.colors.surface) {
+                Surface(color = MaterialTheme.colors.background) {
                     HelloScreen(helloViewModel = viewModel)
                 }
             }

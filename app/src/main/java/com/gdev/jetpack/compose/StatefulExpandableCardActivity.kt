@@ -3,10 +3,7 @@ package com.gdev.jetpack.compose
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
@@ -17,8 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gdev.jetpack.compose.ui.theme.HelloComposeTheme
+
 const val titleCard = "Slatri Utara"
-const val body = "Slatri adalah desa di kecamatan Larangan, Brebes, Jawa Tengah, Indonesia. Desa ini berjarak sekitar 9 Km dari ibu kota kecamatan Larangan ke arah utara atau 18 Km dari ibu kota Kabupaten Brebes melalui Sitanggal."
+const val body =
+    "Slatri adalah desa di kecamatan Larangan, Brebes, Jawa Tengah, Indonesia. Desa ini berjarak sekitar 9 Km dari ibu kota kecamatan Larangan ke arah utara atau 18 Km dari ibu kota Kabupaten Brebes melalui Sitanggal."
+
 class StatefulExpandableCardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,20 +35,30 @@ fun ExpandableCardScreen(title: String, body: String) {
         Surface(color = MaterialTheme.colors.background) {
             Column(
                 modifier = Modifier
+                    .padding(16.dp)
                     .fillMaxWidth()
                     .fillMaxHeight(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Card {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth()
+                    ) {
                         Text(text = title)
                         if (expanded) {
+                            Spacer(Modifier.height(16.dp))
                             Text(text = body)
-                            IconButton(onClick = { expanded = false }) {
+                            IconButton(
+                                modifier = Modifier.align(Alignment.End),
+                                onClick = { expanded = false }) {
                                 Icon(Icons.Default.ExpandLess, contentDescription = "Collapse")
                             }
                         } else {
-                            IconButton(onClick = { expanded = true }) {
+                            IconButton(
+                                modifier = Modifier.align(Alignment.End),
+                                onClick = { expanded = true }) {
                                 Icon(Icons.Default.ExpandMore, contentDescription = "Expand")
                             }
                         }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HelloCompose</string>
+    <string name="app_name">Hello Compose</string>
     <string-array name="speedTestRangeValues">
         <item>0</item>
         <item>100</item>
