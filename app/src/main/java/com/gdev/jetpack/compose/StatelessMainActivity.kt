@@ -1,6 +1,7 @@
 package com.gdev.jetpack.compose
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -13,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -61,22 +63,27 @@ fun HelloScreen(helloViewModel: HelloViewModel) {
 @Composable
 fun HelloContent(name: String, onNameChange: (String) -> Unit) {
     var greeting by remember { mutableStateOf("") }
+    val context = LocalContext.current
     Column(
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()
-            .fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+            .fillMaxHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally) {
+
         //Text Greeting
         TextGreeting(greeting)
-        OutlinedTextField(value = name, onValueChange = onNameChange, label = {
-            Text(
-                "Name"
-            )
+
+        OutlinedTextField(
+            value = name,
+            onValueChange = onNameChange,
+            label = { Text("Name")
         })
+
         //Button Click Me
-        Button(modifier = Modifier
-            .padding(16.dp), onClick = { greeting = name }) {
+        Button(
+            modifier = Modifier.padding(16.dp),
+            onClick = { if (name.isEmpty()) Toast.makeText(context, "Enter Name", Toast.LENGTH_SHORT).show() else greeting = name }) {
             Text(text = "Click Me")
         }
     }
@@ -90,5 +97,3 @@ fun TextGreeting(name: String) {
         style = MaterialTheme.typography.h5
     )
 }
-
-
